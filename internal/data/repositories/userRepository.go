@@ -19,7 +19,7 @@ func NewUserRepository(db data.DB) *UserRepository {
 
 func (r *UserRepository) FindByID(ctx context.Context, id uuid.UUID) (*entities.User, error) {
 	rows, err := r.db.Query(ctx, `
-		SELECT id, username, email, hashedPassword
+		SELECT id, username, email, hashed_password
 		FROM users
 		WHERE id = $1
 	`, id)
@@ -46,7 +46,7 @@ func (r *UserRepository) FindByID(ctx context.Context, id uuid.UUID) (*entities.
 
 func (r *UserRepository) FindByUsername(ctx context.Context, username string) (*entities.User, error) {
 	rows, err := r.db.Query(ctx, `
-		SELECT id, username, email, hashedPassword
+		SELECT id, username, email, hashed_password
 		FROM users
 		WHERE username = $1
 	`, username)
